@@ -8,6 +8,7 @@ public class Test {
 		String timeString = String.valueOf(time);
 			if(StringUtils.isEmpty(timeString)){
 				System.out.println(111);
+
 			}
 		System.out.println(222);
     }
