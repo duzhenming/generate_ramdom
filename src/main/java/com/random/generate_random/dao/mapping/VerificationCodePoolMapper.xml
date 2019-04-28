@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.random.generate_random.dao.VerificationCodePoolMapper" >
+  <resultMap id="BaseResultMap" type="com.random.generate_random.entity.VerificationCodePool" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="customer_id" property="customerId" jdbcType="BIGINT" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="biz_type" property="bizType" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="check_user" property="checkUser" jdbcType="BIGINT" />
+    <result column="verification_time" property="verificationTime" jdbcType="TIMESTAMP" />
+    <result column="clinic_id" property="clinicId" jdbcType="BIGINT" />
+    <result column="tenant_id" property="tenantId" jdbcType="BIGINT" />
+    <result column="receive_time" property="receiveTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, customer_id, code, mobile, biz_type, status, check_user, verification_time, clinic_id, 
+    tenant_id, receive_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_verification_code_pool
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_verification_code_pool
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.random.generate_random.entity.VerificationCodePool" >
+    insert into t_verification_code_pool (id, customer_id, code, 
+      mobile, biz_type, status, 
+      check_user, verification_time, clinic_id, 
+      tenant_id, receive_time)
+    values (#{id,jdbcType=BIGINT}, #{customerId,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{bizType,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{checkUser,jdbcType=BIGINT}, #{verificationTime,jdbcType=TIMESTAMP}, #{clinicId,jdbcType=BIGINT}, 
+      #{tenantId,jdbcType=BIGINT}, #{receiveTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.random.generate_random.entity.VerificationCodePool" >
+    insert into t_verification_code_pool
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="bizType != null" >
+        biz_type,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="checkUser != null" >
+        check_user,
+      </if>
+      <if test="verificationTime != null" >
+        verification_time,
+      </if>
+      <if test="clinicId != null" >
+        clinic_id,
+      </if>
+      <if test="tenantId != null" >
+        tenant_id,
+      </if>
+      <if test="receiveTime != null" >
+        receive_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="bizType != null" >
+        #{bizType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="checkUser != null" >
+        #{checkUser,jdbcType=BIGINT},
+      </if>
+      <if test="verificationTime != null" >
+        #{verificationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clinicId != null" >
+        #{clinicId,jdbcType=BIGINT},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=BIGINT},
+      </if>
+      <if test="receiveTime != null" >
+        #{receiveTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.random.generate_random.entity.VerificationCodePool" >
+    update t_verification_code_pool
+    <set >
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="bizType != null" >
+        biz_type = #{bizType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="checkUser != null" >
+        check_user = #{checkUser,jdbcType=BIGINT},
+      </if>
+      <if test="verificationTime != null" >
+        verification_time = #{verificationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clinicId != null" >
+        clinic_id = #{clinicId,jdbcType=BIGINT},
+      </if>
+      <if test="tenantId != null" >
+        tenant_id = #{tenantId,jdbcType=BIGINT},
+      </if>
+      <if test="receiveTime != null" >
+        receive_time = #{receiveTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.random.generate_random.entity.VerificationCodePool" >
+    update t_verification_code_pool
+    set customer_id = #{customerId,jdbcType=BIGINT},
+      code = #{code,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      biz_type = #{bizType,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      check_user = #{checkUser,jdbcType=BIGINT},
+      verification_time = #{verificationTime,jdbcType=TIMESTAMP},
+      clinic_id = #{clinicId,jdbcType=BIGINT},
+      tenant_id = #{tenantId,jdbcType=BIGINT},
+      receive_time = #{receiveTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByCode" resultType="java.lang.String" >
+    select
+      code
+    from t_verification_code_pool
+  </select>
+  <insert id="insertBatchCode" parameterType="java.util.Map" >
+    insert into t_verification_code_pool (code, biz_type, status)
+    values
+    <foreach collection ="codes" item="code" index= "index" separator =",">
+      (#{code,jdbcType=VARCHAR}, 102, 1)
+    </foreach>
+  </insert>
+</mapper>

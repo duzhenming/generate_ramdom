@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.random.generate_random.dao.ChangeCodeMapper" >
+  <resultMap id="BaseResultMap" type="com.random.generate_random.entity.ChangeCode" >
+    <id column="change_code_id" property="changeCodeId" jdbcType="CHAR" />
+    <result column="change_code" property="changeCode" jdbcType="CHAR" />
+    <result column="channel_code" property="channelCode" jdbcType="CHAR" />
+    <result column="change_start_time" property="changeStartTime" jdbcType="TIMESTAMP" />
+    <result column="change_end_time" property="changeEndTime" jdbcType="TIMESTAMP" />
+    <result column="change_code_status" property="changeCodeStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    change_code_id, change_code, channel_code, change_start_time, change_end_time, change_code_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from e_change_code
+    where change_code_id = #{changeCodeId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from e_change_code
+    where change_code_id = #{changeCodeId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.random.generate_random.entity.ChangeCode" >
+    insert into e_change_code (change_code_id, change_code, channel_code, 
+      change_start_time, change_end_time, change_code_status
+      )
+    values (#{changeCodeId,jdbcType=CHAR}, #{changeCode,jdbcType=CHAR}, #{channelCode,jdbcType=CHAR}, 
+      #{changeStartTime,jdbcType=TIMESTAMP}, #{changeEndTime,jdbcType=TIMESTAMP}, #{changeCodeStatus,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.random.generate_random.entity.ChangeCode" >
+    insert into e_change_code
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="changeCodeId != null" >
+        change_code_id,
+      </if>
+      <if test="changeCode != null" >
+        change_code,
+      </if>
+      <if test="channelCode != null" >
+        channel_code,
+      </if>
+      <if test="changeStartTime != null" >
+        change_start_time,
+      </if>
+      <if test="changeEndTime != null" >
+        change_end_time,
+      </if>
+      <if test="changeCodeStatus != null" >
+        change_code_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="changeCodeId != null" >
+        #{changeCodeId,jdbcType=CHAR},
+      </if>
+      <if test="changeCode != null" >
+        #{changeCode,jdbcType=CHAR},
+      </if>
+      <if test="channelCode != null" >
+        #{channelCode,jdbcType=CHAR},
+      </if>
+      <if test="changeStartTime != null" >
+        #{changeStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeEndTime != null" >
+        #{changeEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeCodeStatus != null" >
+        #{changeCodeStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.random.generate_random.entity.ChangeCode" >
+    update e_change_code
+    <set >
+      <if test="changeCode != null" >
+        change_code = #{changeCode,jdbcType=CHAR},
+      </if>
+      <if test="channelCode != null" >
+        channel_code = #{channelCode,jdbcType=CHAR},
+      </if>
+      <if test="changeStartTime != null" >
+        change_start_time = #{changeStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeEndTime != null" >
+        change_end_time = #{changeEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changeCodeStatus != null" >
+        change_code_status = #{changeCodeStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where change_code_id = #{changeCodeId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.random.generate_random.entity.ChangeCode" >
+    update e_change_code
+    set change_code = #{changeCode,jdbcType=CHAR},
+      channel_code = #{channelCode,jdbcType=CHAR},
+      change_start_time = #{changeStartTime,jdbcType=TIMESTAMP},
+      change_end_time = #{changeEndTime,jdbcType=TIMESTAMP},
+      change_code_status = #{changeCodeStatus,jdbcType=TINYINT}
+    where change_code_id = #{changeCodeId,jdbcType=CHAR}
+  </update>
+  <select id="selectByCode" resultType="java.lang.String" >
+    select
+      change_code
+    from e_change_code
+  </select>
+  <insert id="insertBatchCode" parameterType="java.util.Map" >
+    insert into e_change_code (change_code_id, change_code, channel_code, change_code_status)
+    values
+    <foreach collection ="codes" item="code" index= "index" separator =",">
+      (replace(uuid(),'-',''),#{code,jdbcType=VARCHAR}, '0801300', 0)
+    </foreach>
+  </insert>
+</mapper>

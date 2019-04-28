@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: jdbc:mysql://10.1.2.12:61818/mkt_prd?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: mkt
+    password: mK3t4G#$%
+    driverClassName: com.mysql.cj.jdbc.Driver

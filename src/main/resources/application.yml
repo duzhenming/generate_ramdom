@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: local
+  application:
+    name: generate_ramdom
+
+server:
+  port: 8996
+
+#mybatis配置
+mybatis:
+  mapperLocations: classpath:com/random/generate_random/dao/mapping/*Mapper.xml
+  typeAliasesPackage: com.random.generate_random.entity
