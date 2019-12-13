@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.random.generate_random.dao.FmInterestsMapper">
+
+  <!--根据兑换码查询兑换票相关信息 返回map-->
+  <resultMap id="queryFmInterestsInfoByCode" type="com.random.generate_random.entity.FmInterests">
+   	<result column="codeId" jdbcType="VARCHAR" property="codeId" />
+   	<result column="interestsId" jdbcType="VARCHAR" property="interestsId" />
+    <result column="name" jdbcType="VARCHAR" property="tenantName" />
+    <result column="ticket_name" jdbcType="VARCHAR" property="ticketName" />
+    <result column="use_intro" jdbcType="VARCHAR" property="useIntro" />
+    <result column="disChannelCode" jdbcType="VARCHAR" property="disChannelCode" />
+    <result column="validity_begin" jdbcType="VARCHAR" property="validityBegin" />
+    <result column="validity_end" jdbcType="VARCHAR" property="validityEnd" />
+    <result column="biz_type" jdbcType="INTEGER" property="bizType" />
+  </resultMap>
+	<insert id="insertBatchCode">
+		INSERT INTO `fm_channel_code_relate`(`id`, `promotion_channel_id`, `interests_id`, `interests_type`, `code`, `code_state`, `scene`, `data_state`, `create_time`) VALUES
+		<foreach collection="codes" item="code" separator=",">
+			(REPLACE(UUID(),'-',''),#{channelId},#{interestsId},'1001',#{code},1,1,1,#{createTime})
+		</foreach>
+	</insert>
+	<!-- 根据兑换码查询兑换票相关信息 -->
+  <select id="queryFmInterestsInfoByCode" resultMap="queryFmInterestsInfoByCode"  parameterType="java.lang.String">
+ 		select ftn.`name`,ft.ticket_name,fcrt.id as codeId,fts.use_intro,fts.id as interestsId,ft.id as ticketId ,fpc.code as disChannelCode,
+ 		DATE_FORMAT(
+					fts.validity_begin,
+					'%Y-%m-%d'
+				) as validity_begin,
+ 			DATE_FORMAT(
+					fts.validity_end,
+					'%Y-%m-%d'
+				) as validity_end,
+		fts.biz_type 
+ 	    from fm_channel_code_relate fcrt
+		INNER JOIN fm_interests fts on fts.id=fcrt.interests_id
+		INNER JOIN fm_tenant_interests_relate ftr on ftr.interests_id=fts.id
+		INNER JOIN fm_tenant_product_relate fpt on fpt.interests_id=ftr.interests_id
+		INNER JOIN fm_tenants ftn on ftn.id=ftr.tenant_id
+		INNER JOIN fm_ticket ft on ft.id=fpt.product_id
+		INNER JOIN fm_promotion_channel fpc on fpc.id=fcrt.promotion_channel_id
+		where fcrt.`code`=#{code}   and fts.data_state=1 and fts.biz_type=3001
+  </select>
+	<select id="selectAllCode" resultType="java.lang.String">
+		SELECT code FROM fm_channel_code_relate
+	</select>
+</mapper>

@@ -112,7 +112,7 @@ public class ExcelWrite {
      *
      * @param fileDir   文件路径
      * @param sheetName 表格索引
-     * @param object
+     * @param mapList
      * @throws Exception
      */
     public static void writeToExcel(String fileDir, String sheetName, List<Map> mapList) throws Exception {

@@ -14,7 +14,7 @@
 
         <!-- jdbc连接 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;tinyInt1isBit=false"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/code?useUnicode=true&amp;tinyInt1isBit=false"
                         userId="root"
                         password="root" />
 
@@ -46,8 +46,8 @@
         </javaClientGenerator>
 
         <!-- 配置表信息 -->
-        <table tableName="e_change_code"
-               domainObjectName="ChangeCode" enableCountByExample="false"
+        <table tableName="ims_ypuk_tchk_cardcode"
+               domainObjectName="CardCode" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
         </table>

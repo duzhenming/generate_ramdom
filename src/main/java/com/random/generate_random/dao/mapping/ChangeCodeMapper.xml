@@ -112,7 +112,7 @@
     insert into e_change_code (change_code_id, change_code, channel_code, change_code_status)
     values
     <foreach collection ="codes" item="code" index= "index" separator =",">
-      (replace(uuid(),'-',''),#{code,jdbcType=VARCHAR}, '0801300', 0)
+      (replace(uuid(),'-',''),#{code,jdbcType=VARCHAR}, '0805100', 0)
     </foreach>
   </insert>
 </mapper>

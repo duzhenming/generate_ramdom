@@ -16,12 +16,26 @@ public class GenerateAction {
     private IGenerateService generateRandomCode;
 
     @GetMapping("/generateRandomCode")
-    public List<String> generateRandomCode(Integer totalNum, Integer num){
-        return generateRandomCode.generateRandomCode(totalNum,num);
+    public List<String> generateRandomCode(Integer totalNum, Integer num, String couponId) {
+        return generateRandomCode.generateRandomCode(totalNum, num, couponId);
     }
 
     @GetMapping("/readExcelInsertTable")
-    public List<String> readExcelInsertTable(String filePath, Integer excelNum){
+    public List<String> readExcelInsertTable(String filePath, Integer excelNum, String couponId) {
         return generateRandomCode.readExcelInsertTable(filePath, excelNum);
+    }
+
+
+    /**
+     * 生产成权益渠道码
+     * @param totalNum 码总数
+     * @param num = pageSize 每页数量能和码总数整除
+     * @param channelId
+     * @param interestsId
+     * @return
+     */
+    @GetMapping("/generateInterestsCode")
+    public List<String> generateInterestsCode(Integer totalNum, Integer num, String channelId, String interestsId) {
+        return generateRandomCode.generateInterestsCode(totalNum, num, channelId, interestsId);
     }
 }

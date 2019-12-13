@@ -8,6 +8,7 @@ package com.random.generate_random.util;
 public class RandomCreateCode {
     public static final String NUMBER = "0123456789";
     public static final String CHARACTER = "0123456789abcdefghijklmnopqrstuvwxyz";
+    public static final String NUMAND_BIG_CHAR = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     /**
      * 数字模式
      */
@@ -16,6 +17,10 @@ public class RandomCreateCode {
      * 数字+字母模式
      */
     public static final int MODE_CHARACTER = 2;
+    /**
+     * 数字+大写字母模式
+     */
+    public static final int MODE_NUM_BIG_CHAR = 3;
 
     public static final String randomNumber(int length, int mode) {
         char[] numbersAndLetters = null;
@@ -32,6 +37,8 @@ public class RandomCreateCode {
             case MODE_CHARACTER:
                 content = CHARACTER;
                 break;
+            case MODE_NUM_BIG_CHAR:
+                content = NUMAND_BIG_CHAR;
             default:
                 break;
         }
